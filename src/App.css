@@ -5,7 +5,8 @@
 }
 
 body{
-  font-family: "Gurmukhi Sangam MN", sans-serif;
+  font-family: Charter, sans-serif;
+  /*font-family: cursive, sans-serif;*/
   line-height: 1.5;
   color: darkblue;
   font-size: xx-large;
@@ -39,7 +40,7 @@ button{
   color: darkblue;
   background: white;
   font-size: medium;
-  font-family: "Gurmukhi Sangam MN", sans-serif;
+  font-family: Charter, sans-serif;
   border-color: darkblue;
   border-radius: 2mm;
 }
