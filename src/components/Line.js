@@ -19,7 +19,7 @@ class LineGraph extends Component {
                           text:'Line Graph',
                           fontSize:25,
                           fontColor:'white',
-                          fontFamily:'Gurmukhi Sangam MN'
+                          fontFamily:'Charter'
                       },
                       legend:{
                           display:true,

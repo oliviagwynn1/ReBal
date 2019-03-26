@@ -19,7 +19,7 @@ class Chart extends Component {
                           text:'Bar Graph',
                           fontSize:25,
                           fontColor:'white',
-                          fontFamily:'Gurmukhi Sangam MN'
+                          fontFamily:'Charter'
                       },
                       legend:{
                           display:false
