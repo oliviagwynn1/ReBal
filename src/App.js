@@ -11,12 +11,22 @@ class App extends Component {
 			posts: [[Date.now(), 0, 0]],
 			earliestTime: 0,
 			isRecording: 0,
+			isToggleOn: true
 		 };
 		socket = socketIOClient("http://localhost:8000/");
+		this.handleClick = this.handleClick.bind(this);
 	}
 
-	componentDidMount() {
-		socket.on('data', data => this.updateWeightState(data.data));
+	handleClick() {
+		this.setState(state => ({
+			isToggleOn: !state.isToggleOn
+		}));
+		if (this.state.isToggleOn === true) {
+			socket.on('data', data => this.updateWeightState(data.data));
+		}
+		else {
+			socket.off();
+		}
 	}
 
 	parseData(weightState, time) {
@@ -25,7 +35,6 @@ class App extends Component {
 	}
 
 	updateWeightState(weightState) {
-		// alert(weightState.data);
 		const currTime = Date.now();
 		if (this.state.earliestTime === 0) {
 			this.setState({earliestTime: currTime});
@@ -114,7 +123,7 @@ class App extends Component {
 					ReBal
 				</h1>
 				<button className='button' onClick={this.handleClick}>
-					Weight Data
+					{this.state.isToggleOn ? 'Get Data' : 'Stop Data'}
 				</button>
 			</div>
 			<Chart chartData={this.getChartData()}/>
