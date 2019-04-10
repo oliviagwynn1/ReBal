@@ -2,39 +2,36 @@ import React, { Component } from 'react';
 import './App.css';
 import Chart from './components/Chart';
 import Line from './components/Line';
-var config = require('./particle_logger/config.json');
-
-//https://api.particle.io/v1/devices?access_token=0312a8c10e2480a3d645e84eb9bd100ad90e42f9
-
+import socketIOClient from 'socket.io-client';
+var socket;
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
 			posts: [[Date.now(), 0, 0]],
-			earliestTime: 0
-		};
-		this.eventSource = new EventSource("https://api.particle.io/v1/devices/events?access_token="+config.access_token);
-		this.eventSource.addEventListener("W", e =>
-			this.updateWeightState(JSON.parse(e.data)));
+			earliestTime: 0,
+			isRecording: 0,
+		 };
+		socket = socketIOClient("http://localhost:8000/");
 	}
 
-	// componentDidMount() {
-	// 	this.eventSource.addEventListener("W", e =>
-	// 		this.updateWeightState(JSON.parse(e.data)));
-	// }
+	componentDidMount() {
+		socket.on('data', data => this.updateWeightState(data.data));
+	}
 
 	parseData(weightState, time) {
-		const weights = weightState.data.split(',').map(e => Number(e));
+		const weights = weightState.split(',').map(e => Number(e));
 		return [time, weights[0], weights[1]];
 	}
 
 	updateWeightState(weightState) {
-		const currTime = Date.parse(weightState.published_at);
+		// alert(weightState.data);
+		const currTime = Date.now();
 		if (this.state.earliestTime === 0) {
 			this.setState({earliestTime: currTime});
 		}
 		const timeDiff = currTime - this.state.earliestTime;
-		if (timeDiff>60000) {
+		if (timeDiff>20000) {
 			this.setState(prevState => {
 				const newposts = prevState.posts.concat([this.parseData(weightState, currTime)]);
 				newposts.shift();
@@ -50,21 +47,6 @@ class App extends Component {
 		}
 	}
 
-	//
-	// handleClick () {
-	// 	axios.get('https://my-json-server.typicode.com/oliviagwynn1/FakeJSONServer/posts')
-	// 		.then(res => this.setState({posts :
-	// 				res.data.map(x => x.vals).map(x => x.map(y=> Number(y)))
-	// 		}));
-	// }
-
-
-	// module.exports = function(CSVLogging, CSVName){
-	// var es = new EventSource("https://api.particle.io/v1/devices/events?access_token="+config.access_token); // Listen to the stream
-	// for (index in config.events){
-	// 	es.addEventListener(config.events[index],function(message){ handleEvent(message, config.events[index], CSVLogging, CSVName)});
-	// }
-	// }
 
 	getChartData(){
 		const latest_posts = this.state.posts[this.state.posts.length-1];
@@ -88,7 +70,7 @@ class App extends Component {
 
 	getLineData(){
 		const basetime = this.state.earliestTime;
-		const posts = this.state.posts.map(x => [Math.floor((x[0]-basetime)/1000), x[1], x[2]]);
+		const posts = this.state.posts.map(x => [Math.floor((x[0]-basetime)/10), x[1], x[2]]);
 		return {
 			type: "line",
 			labels: posts.map(a => a[0]),
@@ -141,5 +123,5 @@ class App extends Component {
 		);
 	}
 }
- 
+
 export default App;
