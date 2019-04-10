@@ -11,7 +11,7 @@ class LineGraph extends Component {
       return (
           <div className="chart">
               <Line
-                  height={300}
+                  height={400}
                   data={this.props.lineData}
                   options={{
                       title:{
@@ -28,13 +28,14 @@ class LineGraph extends Component {
                       scales: {
                           yAxes: [{
                               ticks: {
+
                                   beginAtZero: true
                               }
                           }],
                           xAxes: [{
                               ticks: {
                                   beginAtZero: true,
-                                  autoSkip: false
+                                  autoSkip: true
                               }
                           }]
                       }
