@@ -28,15 +28,12 @@ class LineGraph extends Component {
                       scales: {
                           yAxes: [{
                               ticks: {
-
                                   beginAtZero: true
                               }
                           }],
                           xAxes: [{
-                              // labels: false,
                               ticks: {
                                   beginAtZero: true,
-                                  autoSkip: true
                               }
                           }]
                       },
