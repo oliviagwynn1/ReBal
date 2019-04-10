@@ -33,11 +33,17 @@ class LineGraph extends Component {
                               }
                           }],
                           xAxes: [{
+                              // labels: false,
                               ticks: {
                                   beginAtZero: true,
                                   autoSkip: true
                               }
                           }]
+                      },
+                      elements: {
+                          point: {
+                              radius: 0
+                          }
                       }
                   }}
               />
