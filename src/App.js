@@ -79,7 +79,7 @@ class App extends Component {
 
 	getLineData(){
 		const basetime = this.state.earliestTime;
-		const posts = this.state.posts.map(x => [Math.floor((x[0]-basetime)/10), x[1], x[2]]);
+		const posts = this.state.posts.map(x => [Math.floor((x[0]-basetime)/5), x[1], x[2]]);
 		return {
 			type: "line",
 			labels: posts.map(a => a[0]),

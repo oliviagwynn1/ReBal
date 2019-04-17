@@ -34,6 +34,10 @@ class LineGraph extends Component {
                           xAxes: [{
                               ticks: {
                                   beginAtZero: true,
+                                  display: false,
+                              },
+                              gridLines: {
+                                  display: false
                               }
                           }]
                       },
