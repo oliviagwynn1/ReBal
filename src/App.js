@@ -40,7 +40,7 @@ class App extends Component {
 			this.setState({earliestTime: currTime});
 		}
 		const timeDiff = currTime - this.state.earliestTime;
-		if (timeDiff>10000) {
+		if (timeDiff>5000) {
 			this.setState(prevState => {
 				const newposts = prevState.posts.concat([this.parseData(weightState, currTime)]);
 				newposts.shift();
