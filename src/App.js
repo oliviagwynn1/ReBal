@@ -13,7 +13,10 @@ class App extends Component {
 			isRecording: 0,
 			isToggleOn: true
 		 };
-		socket = socketIOClient("http://10.194.18.172:8000");
+		// socket = socketIOClient("http://10.194.18.172:8000");
+		socket = socketIOClient("https://rebal.netlify.com:8000");
+		// socket = socketIOClient("https://localhost:8000");
+
 		this.handleClick = this.handleClick.bind(this);
 	}
 
