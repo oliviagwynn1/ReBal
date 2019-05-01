@@ -7,7 +7,7 @@ class LineGraph extends Component {
         super(props);
     }
 
-  render(){
+    render(){
       return (
           <div className="chart">
               <Line

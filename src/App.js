@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
 import Chart from './components/Chart';
-import Line from './components/Line';
 import socketIOClient from 'socket.io-client';
+import Line from "./components/Line";
 var socket;
+
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			posts: [[Date.now(), 0, 0]],
+			posts: [{date: Date.now(), left: 0, right: 0, total: 0}],
 			earliestTime: 0,
 			isRecording: 0,
 			isToggleOn: true
 		 };
-		// socket = socketIOClient("http://10.194.18.172:8000");
-		// socket = socketIOClient("http://rebal.netlify.com:8000");
 		socket = socketIOClient("http://localhost:8000");
 
 		this.handleClick = this.handleClick.bind(this);

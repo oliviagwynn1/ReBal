@@ -1,9 +1,6 @@
 import Rebase from 'rebase';
 import firebase from 'firebase';
 
-// // Add the Firebase products that you want to use
-// require("firebase/auth");
-// require("firebase/database");
 
 const config = {
     apiKey: process.env.REACT_APP_FIREBASE_KEY,

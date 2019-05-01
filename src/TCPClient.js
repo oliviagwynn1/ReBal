@@ -1,6 +1,5 @@
 const PORT = 30000;
 const HOST = '10.194.29.178'; //Livi's Laptop
-// const HOST = '10.194.18.172'; //Raspberry Pi
 const SEND_PORT = 8000;
 
 const dgram = require('dgram');
